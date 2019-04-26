@@ -104,6 +104,8 @@ echo $(date) " - Azure CLI installation complete"
 sudo yum install -y ImageMagick
 
 # Configure DNS so it always has the domain name
+cat /etc/resolv.conf
+
 echo $(date) " - Adding DOMAIN to search for resolv.conf"
 if [[ $CUSTOMDOMAIN == "none" ]]
 then
@@ -112,10 +114,10 @@ else
 	DOMAINNAME=$CUSTOMDOMAIN
 fi
 
-echo "DOMAIN=$DOMAINNAME" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+#echo "DOMAIN=$DOMAINNAME" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 
 echo $(date) " - Restarting NetworkManager"
-runuser -l $SUDOUSER -c "ansible localhost -o -b -m service -a \"name=NetworkManager state=restarted\""
+#runuser -l $SUDOUSER -c "ansible localhost -o -b -m service -a \"name=NetworkManager state=restarted\""
 echo $(date) " - NetworkManager configuration complete"
 
 # Run Ansible Playbook to update ansible.cfg file
